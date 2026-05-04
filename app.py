@@ -18,7 +18,7 @@ else:
 
 # Initialize the model (using a fast model suitable for chat)
 try:
-    model = genai.GenerativeModel('gemini-2.5-flash-lite')
+    model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
 except Exception as e:
     print(f"Error initializing model: {e}")
     model = None
