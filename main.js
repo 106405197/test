@@ -37,3 +37,110 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(element);
   });
 });
+
+// AI Chatbot Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const chatToggleBtn = document.getElementById("chat-toggle");
+  const chatContainer = document.getElementById("chat-container");
+  const closeChatBtn = document.getElementById("close-chat");
+  const chatInput = document.getElementById("chat-input");
+  const sendChatBtn = document.getElementById("send-chat");
+  const chatMessages = document.getElementById("chat-messages");
+
+  // Toggle chat visibility
+  if (chatToggleBtn && chatContainer) {
+    chatToggleBtn.addEventListener("click", () => {
+      chatContainer.classList.add("active");
+      if (chatInput) chatInput.focus();
+    });
+
+    closeChatBtn.addEventListener("click", () => {
+      chatContainer.classList.remove("active");
+    });
+  }
+
+  // Function to add a message to the chat
+  function appendMessage(text, sender) {
+    if (!chatMessages) return;
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message");
+    messageDiv.classList.add(sender === "user" ? "user-message" : "ai-message");
+    messageDiv.textContent = text;
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Function to show typing indicator
+  function showTyping() {
+    if (!chatMessages) return;
+    const typingDiv = document.createElement("div");
+    typingDiv.classList.add("typing-indicator");
+    typingDiv.id = "typing-indicator";
+    typingDiv.innerHTML =
+      '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Function to remove typing indicator
+  function removeTyping() {
+    const typingDiv = document.getElementById("typing-indicator");
+    if (typingDiv) {
+      typingDiv.remove();
+    }
+  }
+
+  // Send message to backend
+  async function sendMessage() {
+    if (!chatInput) return;
+    const text = chatInput.value.trim();
+    if (!text) return;
+
+    // Display user message
+    appendMessage(text, "user");
+    chatInput.value = "";
+
+    // Show typing animation
+    showTyping();
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: text }),
+      });
+
+      const data = await response.json();
+      removeTyping();
+
+      if (response.ok) {
+        appendMessage(data.response, "ai");
+      } else {
+        appendMessage(
+          "抱歉，發生了一些錯誤：" + (data.error || "未知錯誤"),
+          "ai",
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      removeTyping();
+      appendMessage("網路連線錯誤，無法連線至伺服器。", "ai");
+    }
+  }
+
+  // Send on button click
+  if (sendChatBtn) {
+    sendChatBtn.addEventListener("click", sendMessage);
+  }
+
+  // Send on Enter key press
+  if (chatInput) {
+    chatInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
+  }
+});

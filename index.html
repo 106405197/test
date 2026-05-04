@@ -136,6 +136,43 @@
       </div>
     </footer>
 
+    <!-- AI Chatbot UI -->
+    <div class="chat-container" id="chat-container">
+      <div class="chat-header">
+        <div class="chat-title">
+          <span class="chat-icon">✨</span>
+          <h3>AI 助手</h3>
+        </div>
+        <button id="close-chat" class="chat-close-btn">&times;</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="message ai-message">
+          你好！我是這個網站的 AI 助手，有什麼我可以幫忙的嗎？
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="輸入訊息..."
+          autocomplete="off"
+        />
+        <button id="send-chat" class="chat-send-btn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button id="chat-toggle" class="chat-toggle-btn">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+        <path
+          d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"
+        ></path>
+      </svg>
+    </button>
+
     <script src="main.js"></script>
   </body>
 </html>
