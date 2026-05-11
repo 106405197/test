@@ -1,12 +1,12 @@
 :root {
-  --bg-color: #050505;
-  --text-primary: #e0e0e0;
-  --text-secondary: #a0a0a0;
-  --accent: #bb86fc;
-  --accent-secondary: #03dac6;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --bg-color: #e6e0db;
+  --text-primary: #745237;
+  --text-secondary: #874721;
+  --accent: #9f492d;
+  --accent-secondary: #c2c3c3;
+  --glass-bg: rgba(252, 249, 244, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(116, 82, 55, 0.1);
 }
 
 * {
@@ -91,7 +91,7 @@ nav {
   width: 100%;
   top: 0;
   z-index: 100;
-  background: rgba(5, 5, 5, 0.5);
+  background: rgba(230, 224, 219, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--glass-border);
@@ -145,10 +145,33 @@ nav {
 #hero {
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 0 10%;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+}
+
+.hero-content {
+  flex: 1;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-image img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 20px;
 }
 
 .hero-content h1 {
@@ -256,15 +279,19 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  background-color: #c2c3c3;
+  padding: 1.5rem;
+  border-radius: 16px;
 }
 
 .tag {
   padding: 0.5rem 1rem;
-  background: rgba(187, 134, 252, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(187, 134, 252, 0.3);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 20px;
   font-size: 0.9rem;
+  font-weight: 600;
 }
 
 /* Creation Section */
@@ -325,13 +352,13 @@ main {
 
 /* Philosophy */
 blockquote {
-  font-size: 2rem;
-  font-weight: 300;
+  font-size: 1.6rem;
+  font-weight: 500;
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: center;
   padding: 2rem;
-  color: var(--accent-secondary);
+  color: var(--accent);
   border-left: none;
 }
 
@@ -339,7 +366,11 @@ blockquote {
 footer {
   padding: 5rem 10%;
   text-align: center;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(5, 5, 5, 0) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(252, 249, 244, 0.8) 0%,
+    rgba(230, 224, 219, 0) 100%
+  );
   border-top: 1px solid var(--glass-border);
 }
 
