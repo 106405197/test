@@ -103,31 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show typing animation
     showTyping();
 
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: text }),
-      });
-
-      const data = await response.json();
-      removeTyping();
-
-      if (response.ok) {
-        appendMessage(data.response, "ai");
-      } else {
-        appendMessage(
-          "抱歉，發生了一些錯誤：" + (data.error || "未知錯誤"),
-          "ai",
-        );
-      }
-    } catch (error) {
-      console.error(error);
+    setTimeout(() => {
       removeTyping();
       appendMessage("網路連線錯誤，無法連線至伺服器。", "ai");
-    }
+    }, 1000);
   }
 
   // Send on button click
